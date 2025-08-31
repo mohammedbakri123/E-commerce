@@ -1,0 +1,179 @@
+{
+"will not be updated":{
+    
+    "Admins": {
+    "columns": [
+      "admin_id",
+      "User_id",
+      "admin_lastName",
+      "permissions_value",
+      "PhoneNumber",
+      "address"
+    ]
+  },
+  "Permissions": {
+    "columns": ["permission_id", "permission_name", "Permission_value"]
+  },
+   "User": {
+    "columns": [
+      "User_id",
+      "User_firstName",
+      "Email",
+      "password",
+      "status",
+      "Role",
+      "create_at"
+    ]
+  },
+  "products": {
+    "columns": [
+      "product_id",
+      "product_name",
+      "min_price",
+      "max_price",
+      "brand_id",
+      "category_id",
+      "subcategory_id",
+      "created_at",
+      "updated_at",
+      "discount_price"
+    ]
+  },
+  "variants": {
+    "columns": [
+      "variant_id",
+      "imagePaths(JSON)",
+      "Variant_properties(JSON)",
+      "status",
+      "variant_desc"
+    ]
+  },
+  "stock": {
+    "columns": [
+      "stock_id",
+      "variant_id",
+      "Entrancequantity",
+      "currentquantity",
+      "EntranceDate",
+      "expireDate",
+      "CostPrice",
+      "sellPrice",
+      "is_Done"
+    ]
+  },
+  "Categories": {
+    "columns": ["category_id", "category_name"]
+  },
+  "SubCategories": {
+    "columns": ["subcategory_id", "category_id", "subcategory_name"]
+  },
+  "Brands": {
+    "columns": ["Brand_id", "Brand_name"]
+  },
+  "Cart": {
+    "columns": ["cart_id", "User_id", "create_at", "updated_at"]
+  },
+  "Cart_items": {
+    "columns": [
+      "cart_item_id",
+      "variant_id",
+      "Quantity",
+      "price_per_unit",
+      "totalPrice"
+    ]
+  },
+  "favorites": {
+    "columns": [
+      "favorite_id",
+      "User_id",
+      "variant_id",
+      "create_at"
+    ]
+  },
+
+  "orders": {
+    "columns": [
+      "order_id",
+      "User_id",
+      "order_date",
+      "status",
+      "TotalAmount",
+      "payment_method",
+      "customerAddresse_id"
+    ]
+  },
+  "orderItems": {
+    "columns": [
+      "orderItem_id",
+      "order_id",
+      "stock_id",
+      "Quantity",
+      "unitPrice",
+      "subTotal"
+    ]
+  },
+
+  "Suppliers": {
+    "columns": ["supplier_id", "PhoneNumber", "Address", "company_name"]
+  }
+},
+
+"questionable": {
+  "Products_Evaluation": {
+    "columns": [
+      "Rating_id",
+      "variant_id",
+      "PositiveReviewsCount",
+      "ReviewsCount",
+      "positives",
+      "Negatives"
+    ]
+  },
+  "comments": {
+    "columns": [
+      "comment_id",
+      "Customer_id",
+      "CommentText",
+      "variant_id",
+      "create_at"
+    ]
+  },
+  "Reviews": {
+    "columns": [
+      "Review_id",
+      "Customer_id",
+      "variant_id",
+      "comment",
+      "RatingValue",
+      "created_at"
+    ]
+  },
+ 
+
+  "Offers": {
+    "columns": [
+      "offer_id",
+      "variant_id",
+      "offer_price",
+      "quantity",
+      "start_date",
+      "end_date"
+    ]
+  }
+  ,  "customerAddresses": {
+    "columns": [
+      "customerAddresse_id",
+      "CustomerId",
+      "FullName",
+      "PhoneNumber",
+      "PhoneNumber2",
+      "City",
+      "street",
+      "AddressDetails",
+      "created_at"
+    ]
+  }
+}
+
+}
+}
