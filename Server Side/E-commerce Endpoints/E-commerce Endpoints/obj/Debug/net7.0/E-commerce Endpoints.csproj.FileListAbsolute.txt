@@ -1,0 +1,78 @@
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.csproj.AssemblyReference.cache
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.AssemblyInfoInputs.cache
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.AssemblyInfo.cs
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.csproj.CoreCompileInputs.cache
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\appsettings.Development.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\appsettings.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\E-commerce Endpoints.exe
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\E-commerce Endpoints.deps.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\E-commerce Endpoints.runtimeconfig.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\E-commerce Endpoints.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\E-commerce Endpoints.pdb
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Azure.Core.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Azure.Identity.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.AspNetCore.OpenApi.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Identity.Client.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.OpenApi.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.SqlServer.Server.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Drawing.Common.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Memory.Data.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Runtime.Caching.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Security.Permissions.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.Windows.Extensions.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets\msbuild.E-commerce Endpoints.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets\msbuild.build.E-commerce Endpoints.props
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets\msbuild.buildMultiTargeting.E-commerce Endpoints.props
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets\msbuild.buildTransitive.E-commerce Endpoints.props
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets.pack.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets.build.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\staticwebassets.development.json
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\scopedcss\bundle\E-commerce Endpoints.styles.css
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\refint\E-commerce Endpoints.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.pdb
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.genruntimeconfig.cache
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\ref\E-commerce Endpoints.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Humanizer.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Mono.TextTemplating.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\System.CodeDom.dll
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\obj\Debug\net7.0\E-commerce Endpoints.csproj.CopyComplete
+C:\Users\BAKRI\Desktop\E-commerce\Server Side\E-commerce Endpoints\E-commerce Endpoints\bin\Debug\net7.0\Microsoft.Bcl.TimeProvider.dll
