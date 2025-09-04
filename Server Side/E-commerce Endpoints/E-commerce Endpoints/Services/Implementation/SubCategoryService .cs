@@ -53,7 +53,9 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     Id = subCategory.SubcategoryId,
                     Name = subCategory.SubcategoryName,
-                    CategoryId = subCategory.CategoryId
+                    CategoryId = subCategory.CategoryId,
+                    CategoryName = subCategory.Category.CategoryName,
+                    
                 };
 
                 return ServiceResult<SubCategoryDTO>.Ok(response);
@@ -104,7 +106,9 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     Id = s.SubcategoryId,
                     Name = s.SubcategoryName,
-                    CategoryId = s.CategoryId
+                    CategoryId = s.CategoryId,
+                    CategoryName = s.Category.CategoryName
+                    
                 });
 
                 return ServiceResult<IEnumerable<SubCategoryDTO>>.Ok(response);
@@ -137,7 +141,9 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     Id = subCategory.SubcategoryId,
                     Name = subCategory.SubcategoryName,
-                    CategoryId = subCategory.CategoryId
+                    CategoryId = subCategory.CategoryId,
+                    CategoryName = subCategory.Category.CategoryName
+                    
                 };
 
                 return ServiceResult<SubCategoryDTO>.Ok(response);
@@ -170,7 +176,8 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     Id = subCategory.SubcategoryId,
                     Name = subCategory.SubcategoryName,
-                    CategoryId = subCategory.CategoryId
+                    CategoryId = subCategory.CategoryId,
+                    CategoryName = subCategory.Category.CategoryName
                 };
 
                 return ServiceResult<SubCategoryDTO>.Ok(response);
@@ -213,7 +220,8 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     Id = subCategory.SubcategoryId,
                     Name = subCategory.SubcategoryName,
-                    CategoryId = subCategory.CategoryId
+                    CategoryId = subCategory.CategoryId,
+                    CategoryName = subCategory.Category.CategoryName
                 };
 
                 _logger.LogInformation($"SubCategory with ID {subCategoryDTO.id} updated successfully.");
