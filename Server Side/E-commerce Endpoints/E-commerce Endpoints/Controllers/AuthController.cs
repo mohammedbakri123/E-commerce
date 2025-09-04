@@ -8,52 +8,28 @@ namespace E_commerce_Endpoints.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class AuthController : ControllerBase
+    public class AuthController : MyControllerBase
     {
         private readonly IAuthService _authService;
-
-        public AuthController(IAuthService authService)
+        private readonly ILogger<AuthController> _logger;
+        public AuthController(IAuthService authService, ILogger<AuthController> logger)
         {
             _authService = authService;
+            _logger = logger;
         }
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterDTO dto)
         {
             var result = await _authService.RegisterAsync(dto);
-
-            if (!result.Success)
-            {
-                return result.Error.Type switch
-                {
-                    ServiceErrorType.Duplicate => Conflict(result.Error),
-                    ServiceErrorType.Validation => BadRequest(result.Error),
-                    ServiceErrorType.Unauthorized => Unauthorized(result.Error),
-                    ServiceErrorType.NotFound => NotFound(result.Error),
-                    ServiceErrorType.ServerError => StatusCode(500, result.Error),
-                    _ => BadRequest(result.Error)
-                };
-            }
-
-            return Ok(result.Data);
+            return MapServiceResult(result);
         }
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             var result = await _authService.LoginAsync(dto);
-
-            if (!result.Success)
-            {
-                return result.Error.Type switch
-                {
-                    ServiceErrorType.Unauthorized => Unauthorized(result.Error),
-                    ServiceErrorType.ServerError => StatusCode(500, result.Error),
-                    _ => BadRequest(result.Error)
-                };
-            }
-
-            return Ok(result.Data);
+            return MapServiceResult(result);
         }
     }
 }

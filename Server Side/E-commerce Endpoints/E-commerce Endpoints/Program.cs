@@ -1,4 +1,4 @@
-using E_commerce_Endpoints.Data;
+﻿using E_commerce_Endpoints.Data;
 using E_commerce_Endpoints.Helper;
 using E_commerce_Endpoints.Services.Interfaces;
 using E_commerce_Endpoints.Services.Implementation;
@@ -8,6 +8,18 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//-------------------------------------------------cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5500")
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
+//-------------------------------------------------cors
 
 // Add services to the container.
 
@@ -53,11 +65,15 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IAuthService , AuthService>();
+builder.Services.AddScoped<IUserService , UserService>();
 
 
 
 
 var app = builder.Build();
+
+// ✅ Use CORS before controllers
+app.UseCors("AllowFrontend");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
