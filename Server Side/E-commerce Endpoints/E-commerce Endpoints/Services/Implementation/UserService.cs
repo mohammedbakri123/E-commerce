@@ -1,7 +1,5 @@
 ﻿using E_commerce_Endpoints.Data;
 using E_commerce_Endpoints.Data.Entities;
-using E_commerce_Endpoints.DTO.Authentication.Request;
-using E_commerce_Endpoints.DTO.Authentication.Response;
 using E_commerce_Endpoints.DTO.User.Request;
 using E_commerce_Endpoints.DTO.User.Response;
 using E_commerce_Endpoints.Helper;

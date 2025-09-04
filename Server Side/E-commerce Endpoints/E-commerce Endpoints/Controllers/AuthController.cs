@@ -25,7 +25,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [HttpGet("login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDTO dto)
         {
             var result = await _authService.LoginAsync(dto);
