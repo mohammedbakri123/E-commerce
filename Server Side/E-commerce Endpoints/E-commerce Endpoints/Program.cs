@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using E_commerce_Endpoints.Services.Interfaces.E_commerce_Endpoints.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -70,6 +71,12 @@ builder.Services.AddScoped<ICategoryService , CategoryService>();
 builder.Services.AddScoped<IBrandService, BrandService>();
 builder.Services.AddScoped<ISubCategoryService, SubCategoryService>();
 builder.Services.AddScoped<IProductService , ProductService>();
+builder.Services.AddScoped<IVariantService , VariantService>();
+builder.Services.AddScoped<IOfferService , OfferService>();
+builder.Services.AddScoped<IAdminService , AdminService>();
+builder.Services.AddScoped<ISupplierService , SupplierService>();
+builder.Services.AddScoped<IStockService , StockService>();
+
 
 
 

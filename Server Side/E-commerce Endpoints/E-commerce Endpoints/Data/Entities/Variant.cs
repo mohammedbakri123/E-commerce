@@ -19,10 +19,6 @@ public partial class Variant
 
     public bool? Status { get; set; }
 
-    [Column("Variant_desc")]
-    [StringLength(500)]
-    public string? VariantDesc { get; set; }
-
     [Column("Product_id")]
     public int ProductId { get; set; }
 

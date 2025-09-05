@@ -22,6 +22,6 @@ namespace E_commerce_Endpoints.Services.Interfaces
 );
 
 
-        Task<ServiceResult<bool>> Delete(string id);
+        Task<ServiceResult<bool>> Delete(int id);
     }
 }

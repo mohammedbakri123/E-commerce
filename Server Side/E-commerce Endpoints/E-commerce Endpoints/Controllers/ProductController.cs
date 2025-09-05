@@ -1,6 +1,7 @@
 ﻿using E_commerce_Endpoints.DTO.Product.Request;
 using E_commerce_Endpoints.Services.Interfaces;
 using E_commerce_Endpoints.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_commerce_Endpoints.Controllers
@@ -18,6 +19,7 @@ namespace E_commerce_Endpoints.Controllers
             _logger = logger;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] AddProductDTO dto)
         {
@@ -25,6 +27,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateProductDTO dto)
         {
@@ -32,6 +35,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
+        [Authorize]
         [HttpGet("get/{id:int}")]
         public async Task<IActionResult> GetByID(int id)
         {
@@ -39,6 +43,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
+        [Authorize]
         [HttpGet("getByName")]
         public async Task<IActionResult> GetByName([FromQuery] string name)
         {
@@ -46,6 +51,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
+        [Authorize]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll(
             [FromQuery] int? brandId = null,
@@ -57,8 +63,9 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
+        [Authorize]
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             var result = await _productService.Delete(id);
             return MapServiceResult(result);

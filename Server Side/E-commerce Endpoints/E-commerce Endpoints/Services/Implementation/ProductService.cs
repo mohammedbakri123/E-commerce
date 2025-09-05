@@ -2,6 +2,9 @@
 using E_commerce_Endpoints.Data.Entities;
 using E_commerce_Endpoints.DTO.Product.Request;
 using E_commerce_Endpoints.DTO.Product.Response;
+using E_commerce_Endpoints.DTO.User.Request;
+using E_commerce_Endpoints.DTO.User.Response;
+using E_commerce_Endpoints.Helper;
 using E_commerce_Endpoints.Services.Interfaces;
 using E_commerce_Endpoints.Shared;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +26,20 @@ namespace E_commerce_Endpoints.Services.Implementation
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(productDTO.Name))
-                    return ServiceResult<ProductDTO>.Fail(ServiceErrorType.Validation, "Product name cannot be empty.");
+                if (!Validation.TryValidate(productDTO, out var validationErrors))
+                {
+                    var messages = string.Join("; ", validationErrors.Select(e => e.ErrorMessage));
+                    _logger.LogWarning($"Invalied Input : {messages}");
+                    return ServiceResult<ProductDTO>.Fail(ServiceErrorType.Validation, $"you Should Pass all the required data : {messages}");
+
+                }
+
+                bool IsDublicated = await _context.Products.AnyAsync(p => p.ProductName == productDTO.Name);
+                if (IsDublicated)
+                {
+                    _logger.LogWarning($"Tried To Add Product with Dublicate Name : {productDTO.Name} ");
+                    return ServiceResult<ProductDTO>.Fail(ServiceErrorType.Duplicate, $"Tried To Add Product with Dublicate Name :  {productDTO.Name}  ");
+                }
 
                 var product = new Product
                 {
@@ -42,7 +57,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Server failed to add product: {ex.Message}");
+                _logger.LogError($"Server failed to add product: {ex.Message}, at {DateTime.Now.ToString()}");
                 return ServiceResult<ProductDTO>.Fail(ServiceErrorType.ServerError, "Server failed to add product.");
             }
         }
@@ -51,20 +66,26 @@ namespace E_commerce_Endpoints.Services.Implementation
         {
             try
             {
+                if (!Validation.TryValidate(productDTO, out var validationErrors))
+                {
+                    var messages = string.Join("; ", validationErrors.Select(e => e.ErrorMessage));
+                    _logger.LogWarning($"Invalied Input : {messages}");
+                    return ServiceResult<ProductDTO>.Fail(ServiceErrorType.Validation, $"you Should Pass all the required data : {messages}");
+
+                }
+
                 var product = await _context.Products.FindAsync(productDTO.Id);
                 if (product == null)
+                {
+                    _logger.LogWarning($"Product with ID : {productDTO.Id}, was not found");
                     return ServiceResult<ProductDTO>.Fail(ServiceErrorType.NotFound, $"Product with ID {productDTO.Id} not found.");
+                }
 
-                if (!string.IsNullOrWhiteSpace(productDTO.Name))
+               
                     product.ProductName = productDTO.Name;
-
-                if (productDTO.BrandId.HasValue)
                     product.BrandId = productDTO.BrandId;
-
-                if (productDTO.SubCategoryId.HasValue)
                     product.SubcategoryId = productDTO.SubCategoryId;
-
-                product.UpdatedAt = DateTime.UtcNow;
+                    product.UpdatedAt = DateTime.UtcNow;
 
                 await _context.SaveChangesAsync();
 
@@ -73,7 +94,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Server failed to update product: {ex.Message}");
+                _logger.LogError($"Server failed to update product: {ex.Message}, at {DateTime.Now.ToString()}");
                 return ServiceResult<ProductDTO>.Fail(ServiceErrorType.ServerError, "Server failed to update product.");
             }
         }
@@ -95,21 +116,23 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     Id = product.ProductId,
                     Name = product.ProductName,
-                    BrandID = product.BrandId ?? 0,
+                    BrandID = product.BrandId,
                     BrandName = product.Brand?.BrandName,
-                    SubCategoryID = product.SubcategoryId ?? 0,
+                    SubCategoryID = product.SubcategoryId,
                     SubCategoryName = product.Subcategory?.SubcategoryName,
-                    CategoryID = product.Subcategory?.CategoryId ?? 0,
+                    CategoryID = product.Subcategory?.CategoryId,
                     CategoryName = product.Subcategory?.Category?.CategoryName,
                     CreatedDate = product.CreatedAt,
-                    UpdatedDate = product.UpdatedAt
+                    UpdatedDate = product.UpdatedAt,
+                    
+                    
                 };
 
                 return ServiceResult<ProductDTO>.Ok(response);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Server failed to get product by ID: {ex.Message}");
+                _logger.LogError($"Server failed to get product by ID: {ex.Message}, at {DateTime.Now.ToString()}");
                 return ServiceResult<ProductDTO>.Fail(ServiceErrorType.ServerError, "Server failed to get product.");
             }
         }
@@ -125,7 +148,10 @@ namespace E_commerce_Endpoints.Services.Implementation
                     .FirstOrDefaultAsync(p => p.ProductName == name);
 
                 if (product == null)
+                {
+                    _logger.LogWarning($"Product was Not Found Name : {name}");
                     return ServiceResult<ProductDTO>.Fail(ServiceErrorType.NotFound, $"Product with name '{name}' not found.");
+                }
 
                 var response = new ProductDTO
                 {
@@ -138,14 +164,14 @@ namespace E_commerce_Endpoints.Services.Implementation
                     CategoryID = product.Subcategory?.CategoryId ?? 0,
                     CategoryName = product.Subcategory?.Category?.CategoryName,
                     CreatedDate = product.CreatedAt,
-                    UpdatedDate = product.UpdatedAt
+                    UpdatedDate = product.UpdatedAt,
                 };
 
                 return ServiceResult<ProductDTO>.Ok(response);
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Server failed to get product by name: {ex.Message}");
+                _logger.LogError($"Server failed to get product by name: {ex.Message}, at {DateTime.Now.ToString()}");
                 return ServiceResult<ProductDTO>.Fail(ServiceErrorType.ServerError, "Server failed to get product.");
             }
         }
@@ -189,22 +215,23 @@ namespace E_commerce_Endpoints.Services.Implementation
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Server failed to get all products: {ex.Message}");
+                _logger.LogError($"Server failed to get all products: {ex.Message}, at {DateTime.Now.ToString()}");
                 return ServiceResult<IEnumerable<ProductDTO>>.Fail(ServiceErrorType.ServerError, "Server failed to get products.");
             }
         }
 
-        public async Task<ServiceResult<bool>> Delete(string id)
+        public async Task<ServiceResult<bool>> Delete(int id)
         {
             try
             {
-                if (!int.TryParse(id, out int productId))
-                    return ServiceResult<bool>.Fail(ServiceErrorType.Validation, "Invalid product ID format.");
-
-                var product = await _context.Products.FindAsync(productId);
+               
+                var product = await _context.Products.FindAsync(id);
                 if (product == null)
+                {
+                    _logger.LogWarning($"Product with ID {id} not found.");
                     return ServiceResult<bool>.Fail(ServiceErrorType.NotFound, $"Product with ID {id} not found.");
 
+                }
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
 
@@ -212,7 +239,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Server failed to delete product: {ex.Message}");
+                _logger.LogError($"Server failed to delete product: {ex.Message} , at {DateTime.Now.ToString()}");
                 return ServiceResult<bool>.Fail(ServiceErrorType.ServerError, "Server failed to delete product.");
             }
         }

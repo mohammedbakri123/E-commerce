@@ -18,8 +18,6 @@ public partial class Offer
     [Column("Offer_percentage", TypeName = "decimal(10, 2)")]
     public decimal OfferPercentage { get; set; }
 
-    public int Quantity { get; set; }
-
     [Column("Start_date", TypeName = "date")]
     public DateTime StartDate { get; set; }
 
