@@ -31,14 +31,16 @@ public partial class Order
     [Column("DeliveryInfo_id")]
     public int? DeliveryInfoId { get; set; }
 
+    [Column("Cart_id")]
+    public int CartId { get; set; }
+
     [ForeignKey("DeliveryInfoId")]
     [InverseProperty("Orders")]
     public virtual DeliveryInfo? DeliveryInfo { get; set; }
 
-    [InverseProperty("Order")]
-    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+    [ForeignKey("CartId")]
+    public virtual Cart Cart { get; set; } = null;
 
     [ForeignKey("UserId")]
-    [InverseProperty("Orders")]
     public virtual User User { get; set; } = null!;
 }

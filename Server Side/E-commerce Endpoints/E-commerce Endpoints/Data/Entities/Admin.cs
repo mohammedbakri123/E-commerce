@@ -31,4 +31,5 @@ public partial class Admin
     [ForeignKey("UserId")]
     [InverseProperty("Admins")]
     public virtual User User { get; set; } = null!;
+
 }

@@ -54,7 +54,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to add brand: {ex.Message}");
-                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, "Server failed to add brand.");
+                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to add brand. {ex.Message}");
             }
         }
 
@@ -84,7 +84,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to delete brand: {ex.Message}");
-                return ServiceResult<bool>.Fail(ServiceErrorType.ServerError, "Server failed to delete brand.");
+                return ServiceResult<bool>.Fail(ServiceErrorType.ServerError, $"Server failed to delete brand.  {ex.Message}");
             }
         }
 
@@ -104,7 +104,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to retrieve brands: {ex.Message}");
-                return ServiceResult<IEnumerable<BrandDTO>>.Fail(ServiceErrorType.ServerError, "Server failed to retrieve brands.");
+                return ServiceResult<IEnumerable<BrandDTO>>.Fail(ServiceErrorType.ServerError, $"Server failed to retrieve brands.  {ex.Message}");
             }
         }
 
@@ -136,7 +136,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to retrieve brand: {ex.Message}");
-                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, "Server failed to retrieve brand.");
+                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to retrieve brand.  {ex.Message}");
             }
         }
 
@@ -168,7 +168,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to retrieve brand by name: {ex.Message}");
-                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, "Server failed to retrieve brand.");
+                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to retrieve brand.  {ex.Message}");
             }
         }
 
@@ -185,6 +185,12 @@ namespace E_commerce_Endpoints.Services.Implementation
                 {
                     _logger.LogWarning("Tried to update brand with empty name.");
                     return ServiceResult<BrandDTO>.Fail(ServiceErrorType.Validation, "Brand name cannot be empty.");
+                }
+
+                if (await _context.Brands.AnyAsync(b => b.BrandName == brandDTO.Name))
+                {
+                    _logger.LogWarning($"Duplicate brand Update attempt: {brandDTO.Name}");
+                    return ServiceResult<BrandDTO>.Fail(ServiceErrorType.Duplicate, $"Brand Name : {brandDTO.Name} already exists.");
                 }
 
                 var brand = await _context.Brands.FindAsync(brandDTO.id);
@@ -209,7 +215,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to update brand: {ex.Message}");
-                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, "Server failed to update brand.");
+                return ServiceResult<BrandDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to update brand.  {ex.Message}");
             }
         }
     }

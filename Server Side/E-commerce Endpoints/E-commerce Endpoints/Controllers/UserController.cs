@@ -21,7 +21,7 @@ namespace E_commerce_Endpoints.Controllers
             _logger = logger;
         }
 
-       [Authorize(Roles = "Admin")]
+        //  [Authorize(Roles = "Admin")]
         [HttpPost("add")]
         public async Task<IActionResult> AddUser([FromBody] AddUserDTO dto)
         {
@@ -29,7 +29,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-       [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpGet("all")]
         public async Task<IActionResult> GetAll([FromQuery] string? role, [FromQuery] bool? activeOnly)
         {
@@ -37,7 +37,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -45,7 +45,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpGet("byEmail")]
         public async Task<IActionResult> GetByEmail([FromQuery] string email)
         {
@@ -53,7 +53,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateUserDTO dto)
         {
@@ -61,7 +61,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
@@ -69,7 +69,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpPost("changePassword")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDTO dto)
         {

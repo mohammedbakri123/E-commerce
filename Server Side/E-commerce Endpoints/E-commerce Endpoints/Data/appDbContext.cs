@@ -34,8 +34,6 @@ public partial class appDbContext : DbContext
 
     public virtual DbSet<Order> Orders { get; set; }
 
-    public virtual DbSet<OrderItem> OrderItems { get; set; }
-
     public virtual DbSet<Permission> Permissions { get; set; }
 
     public virtual DbSet<Product> Products { get; set; }
@@ -76,6 +74,8 @@ public partial class appDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Carts)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Carts__User_id__6383C8BA");
+
+
         });
 
         modelBuilder.Entity<CartItem>(entity =>
@@ -141,23 +141,14 @@ public partial class appDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orders__User_id__73BA3083");
+            entity.HasOne(o => o.Cart)
+                .WithOne(c => c.Order)
+                .HasForeignKey<Order>(o => o.CartId) // FK lives in Order
+                .OnDelete(DeleteBehavior.Restrict)   // Prevent cascade delete if you want
+                .HasConstraintName("FK__Orders__Cart_id");
+
+
         });
-
-        modelBuilder.Entity<OrderItem>(entity =>
-        {
-            entity.HasKey(e => e.OrderItemId).HasName("PK__OrderIte__2F31262A53E1C097");
-
-            entity.Property(e => e.SubTotal).HasComputedColumnSql("([Quantity]*[UnitPrice])", true);
-
-            entity.HasOne(d => d.Order).WithMany(p => p.OrderItems)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderItem__Order__7D439ABD");
-
-            entity.HasOne(d => d.Stock).WithMany(p => p.OrderItems)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrderItem__Stock__7E37BEF6");
-        });
-
         modelBuilder.Entity<Permission>(entity =>
         {
             entity.HasKey(e => e.PermissionId).HasName("PK__Permissi__89B4589DF9AD762C");

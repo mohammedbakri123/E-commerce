@@ -37,11 +37,8 @@ public partial class Stock
     [Column("supplier_id")]
     public int? SupplierId { get; set; }
 
-    [InverseProperty("Stock")]
-    public virtual ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-
-    [ForeignKey("SupplierId")]
     [InverseProperty("Stocks")]
+    [ForeignKey("SupplierId")]
     public virtual Supplier? Supplier { get; set; }
 
     [ForeignKey("VariantId")]

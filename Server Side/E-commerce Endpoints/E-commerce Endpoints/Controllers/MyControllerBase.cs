@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 
 public class MyControllerBase : ControllerBase
+
 {
     protected IActionResult MapServiceResult<T>(ServiceResult<T> result)
     {

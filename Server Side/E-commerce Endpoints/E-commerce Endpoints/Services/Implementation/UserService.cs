@@ -63,7 +63,7 @@ namespace E_commerce_Endpoints.Services.Implementation
                     Email = addUserDTO.Email,
                     UserFirstName = addUserDTO.FirstName != "" ? addUserDTO.FirstName : UserHelper.GetUserName(addUserDTO.Email),
                     Password = passwordHash,
-                    Role = addUserDTO.Role,
+                    Role = "Customer",
                     Status = true,
                 };
 
@@ -102,7 +102,7 @@ namespace E_commerce_Endpoints.Services.Implementation
                     _logger.LogWarning("tried to Add Invalied Email");
                     return ServiceResult<bool>.Fail(ServiceErrorType.Validation, "Email is not Valid");
                 }
-                User currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == changePassword.Email);
+                User? currentUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == changePassword.Email);
                 if (currentUser == null)
                 {
                     _logger.LogWarning("Email not Found");
@@ -321,16 +321,16 @@ namespace E_commerce_Endpoints.Services.Implementation
                     _logger.LogWarning($"Invalid email: {updateUserDTO.Email}");
                     return ServiceResult<UserDTO>.Fail(ServiceErrorType.Validation, "Email is not valid.");
                 }
-                if (await _context.Users.AnyAsync(u => u.Email == updateUserDTO.Email))
-                {
-                    _logger.LogWarning("Dublicate Email registeration");
-                    return ServiceResult<UserDTO>.Fail(ServiceErrorType.Duplicate, "Email is already Exist");
-                }
-                if (await _context.Users.AnyAsync(u => u.Email == updateUserDTO.Email))
-                {
-                    _logger.LogWarning("Dublicate Email registeration");
-                    return ServiceResult<UserDTO>.Fail(ServiceErrorType.Duplicate, "Email is already Exist");
-                }
+                //if (await _context.Users.AnyAsync(u => u.Email == updateUserDTO.Email))
+                //{
+                //    _logger.LogWarning("Dublicate Email registeration");
+                //    return ServiceResult<UserDTO>.Fail(ServiceErrorType.Duplicate, "Email is already Exist");
+                //}
+                //if (await _context.Users.AnyAsync(u => (u.Email == updateUserDTO.Email && u.UserId != updateUserDTO.UserId)))
+                //{
+                //    _logger.LogWarning("Dublicate Email registeration");
+                //    return ServiceResult<UserDTO>.Fail(ServiceErrorType.Duplicate, "Email is already Exist");
+                //}
 
                 // Find existing user
                 var user = await _context.Users.FindAsync(updateUserDTO.UserId);
@@ -355,7 +355,7 @@ namespace E_commerce_Endpoints.Services.Implementation
                 // Update user properties
                 user.UserFirstName = updateUserDTO.FirstName;
                 user.Email = updateUserDTO.Email;
-                user.Role = updateUserDTO.Role;
+                //user.Role = updateUserDTO.Role;
                 user.Status = updateUserDTO.Status;
 
                 await _context.SaveChangesAsync();

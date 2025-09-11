@@ -193,6 +193,11 @@ namespace E_commerce_Endpoints.Services.Implementation
                     return ServiceResult<CategoryDTO>.Fail(ServiceErrorType.Validation, "Category name cannot be empty.");
                 }
 
+                if (await _context.Categories.AnyAsync(c => c.CategoryName == categoryDTO.Name))
+                {
+                    _logger.LogWarning($"Duplicate category Update attempt: {categoryDTO.Name}");
+                    return ServiceResult<CategoryDTO>.Fail(ServiceErrorType.Duplicate, $"Category name : {categoryDTO.Name} already exists.");
+                }
                 var category = await _context.Categories.FindAsync(categoryDTO.id);
                 if (category == null)
                 {

@@ -11,8 +11,8 @@ namespace E_commerce_Endpoints.DTO.User.Request
         [Required]
         [EmailAddress]
         public string Email { get; set; }
-        [Required]
-        public string Role { get; set; }
+        //[Required]
+        //public string Role { get; set; }
         [Required]
         public bool Status { get; set; }
     }

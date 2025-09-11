@@ -11,7 +11,6 @@ namespace E_commerce_Endpoints.DTO.Admin.Request
         [StringLength(100, ErrorMessage = "Last name cannot exceed 100 characters.")]
         public string? AdminLastName { get; set; }
 
-
         public int? PermissionsValue { get; set; }
 
         [Required]

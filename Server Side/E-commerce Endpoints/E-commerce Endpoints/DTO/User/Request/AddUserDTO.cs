@@ -13,7 +13,7 @@ namespace E_commerce_Endpoints.DTO.User.Request
         public string Password { get; set; }
         [Required]
         public string ConfirmPassword { get; set; }
-        [Required]
-        public string Role { get; set; }
+        //[Required]
+        //public string Role { get; set; }
     }
 }

@@ -4,9 +4,9 @@ using E_commerce_Endpoints.DTO.Variant.Request;
 using E_commerce_Endpoints.DTO.Variant.Response;
 using E_commerce_Endpoints.Helper;
 using E_commerce_Endpoints.Services.Interfaces;
-using E_commerce_Endpoints.Services.Interfaces.E_commerce_Endpoints.Services.Interfaces;
 using E_commerce_Endpoints.Shared;
 using Microsoft.EntityFrameworkCore;
+using System.Net.NetworkInformation;
 
 namespace E_commerce_Endpoints.Services.Implementation
 {
@@ -19,6 +19,56 @@ namespace E_commerce_Endpoints.Services.Implementation
         {
             _context = context;
             _logger = logger;
+        }
+        public async Task<decimal?> GetVariantPriceAsync(int variantId)
+        {
+            // 1. Get latest stock price
+            var basePrice = await _context.Stocks
+                .Where(s => s.VariantId == variantId)
+                .OrderByDescending(s => s.EntranceDate)
+                .Select(s => s.SellPrice)
+                .FirstOrDefaultAsync();
+
+            if (basePrice <= 0)
+            {
+                _logger.LogWarning($"No stock found for VariantId: {variantId}");
+                return 0; // or throw
+            }
+
+            // 2. Check if there’s an active offer
+            var offer = await _context.Offers
+                .Where(o => o.VariantId == variantId
+                            && o.StartDate <= DateTime.UtcNow
+                            && o.EndDate >= DateTime.UtcNow)
+                .OrderByDescending(o => o.StartDate) // in case multiple, pick latest
+                .FirstOrDefaultAsync();
+
+            if (offer != null)
+            {
+                
+                basePrice = basePrice - (basePrice * (offer.OfferPercentage / 100));
+                _logger.LogInformation($"Offer applied for VariantId: {variantId}. FinalPrice: {basePrice}");
+                
+            }
+
+            // 3. If no offer, return base price
+            return basePrice;
+        }
+
+        public async Task<int> GetVariantQuantityAsync(int variantId)
+        {
+            var stock = await _context.Stocks
+                .Where(s => s.VariantId == variantId)
+                .OrderByDescending(s => s.EntranceDate)
+                .FirstOrDefaultAsync();
+
+            if (stock == null)
+            {
+                _logger.LogWarning($"No stock found for VariantId: {variantId}");
+                return 0; // means out of stock
+            }
+
+            return stock.CurrentQuantity;
         }
 
         public async Task<ServiceResult<VariantDTO>> Add(AddVariantDTO variantDTO)
@@ -85,6 +135,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             }
         }
 
+        
         public async Task<ServiceResult<VariantDTO>> GetByID(int id)
         {
             try
@@ -115,6 +166,38 @@ namespace E_commerce_Endpoints.Services.Implementation
             }
         }
 
+        public async Task<ServiceResult<VariantDTO>> GetByIDWithPriceAndQuantity(int id)
+        {
+            try
+            {
+                var variant = await _context.Variants
+                    .Include(v => v.Product)
+                    .FirstOrDefaultAsync(v => v.VariantId == id);
+
+                if (variant == null)
+                    return ServiceResult<VariantDTO>.Fail(ServiceErrorType.NotFound, $"Variant with ID {id} not found.");
+
+                var response = new VariantDTO
+                {
+                    VariantId = variant.VariantId,
+                    ImagePaths = variant.ImagePaths,
+                    VariantProperties = variant.VariantProperties,
+                    Status = variant.Status,
+                    ProductId = variant.ProductId,
+                    ProductName = variant.Product?.ProductName,
+                    Price = await GetVariantPriceAsync(variant.VariantId),
+                    Quantity = await GetVariantQuantityAsync(variant.VariantId),
+      
+                };
+
+                return ServiceResult<VariantDTO>.Ok(response);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Server failed to get variant by ID: {ex.Message}, at {DateTime.UtcNow}");
+                return ServiceResult<VariantDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to get variant. {ex.Message}");
+            }
+        }
         public async Task<ServiceResult<IEnumerable<VariantDTO>>> GetAll(int? productId = null, bool? status = null)
         {
             try
@@ -146,10 +229,60 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to get all variants: {ex.Message}, at {DateTime.UtcNow}");
-                return ServiceResult<IEnumerable<VariantDTO>>.Fail(ServiceErrorType.ServerError, "Server failed to get variants.");
+                return ServiceResult<IEnumerable<VariantDTO>>.Fail(ServiceErrorType.ServerError, $"Server failed to get variants. {ex.Message}");
             }
         }
 
+        public async Task<ServiceResult<IEnumerable<VariantDTO>>> GetAllWithQuantityAndPrice(int? productId = null, bool? status = null)
+        {
+            try
+            {
+                var query = _context.Variants.AsQueryable();
+
+                if (productId.HasValue)
+                    query = query.Where(v => v.ProductId == productId.Value);
+
+                if (status.HasValue)
+                    query = query.Where(v => v.Status == status.Value);
+
+                var variants = await query
+                    .Include(v => v.Product)
+                    .ToListAsync();
+
+                // Map to DTO with async price & quantity
+                var response = new List<VariantDTO>();
+
+                foreach (var v in variants)
+                {
+                    var quantity = await GetVariantQuantityAsync(v.VariantId);
+
+                    if (quantity <= 0)
+                        continue; // Skip out-of-stock variants
+
+                    var price = await GetVariantPriceAsync(v.VariantId);
+
+                    response.Add(new VariantDTO
+                    {
+                        VariantId = v.VariantId,
+                        ImagePaths = v.ImagePaths,
+                        VariantProperties = v.VariantProperties,
+                        Status = v.Status,
+                        ProductId = v.ProductId,
+                        ProductName = v.Product?.ProductName,
+                        Price = price,
+                        Quantity = quantity
+                    });
+                }
+
+
+                return ServiceResult<IEnumerable<VariantDTO>>.Ok(response!);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Server failed to get all variants: {ex.Message}, at {DateTime.UtcNow}");
+                return ServiceResult<IEnumerable<VariantDTO>>.Fail(ServiceErrorType.ServerError, $"Server failed to get variants. {ex.Message}");
+            }
+        }
 
         public async Task<ServiceResult<bool>> Delete(int id)
         {

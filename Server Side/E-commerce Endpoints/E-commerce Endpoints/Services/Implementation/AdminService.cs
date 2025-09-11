@@ -55,10 +55,13 @@ namespace E_commerce_Endpoints.Services.Implementation
                     AdminLastName = dto.AdminLastName,
                     PermissionsValue = dto.PermissionsValue,
                     PhoneNumber = dto.PhoneNumber,
-                    Address = dto.Address
+                    Address = dto.Address, 
                 };
 
+                
+
                 _context.Admins.Add(admin);
+                user.Role = "Admin";
                 await _context.SaveChangesAsync();
 
                 return await GetByID(admin.AdminId);
@@ -66,7 +69,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to add admin: {ex.Message}, at {DateTime.UtcNow}");
-                return ServiceResult<AdminDTO>.Fail(ServiceErrorType.ServerError, "Server failed to add admin.");
+                return ServiceResult<AdminDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to add admin. {ex.Message}");
             }
         }
 
@@ -99,7 +102,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to update admin: {ex.Message}, at {DateTime.UtcNow}");
-                return ServiceResult<AdminDTO>.Fail(ServiceErrorType.ServerError, "Server failed to update admin.");
+                return ServiceResult<AdminDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to update admin. {ex.Message}");
             }
         }
 
@@ -132,7 +135,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to get admin by ID: {ex.Message}, at {DateTime.UtcNow}");
-                return ServiceResult<AdminDTO>.Fail(ServiceErrorType.ServerError, "Server failed to get admin.");
+                return ServiceResult<AdminDTO>.Fail(ServiceErrorType.ServerError, $"Server failed to get admin. {ex.Message}");
             }
         }
 
@@ -158,7 +161,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to get all admins: {ex.Message}, at {DateTime.UtcNow}");
-                return ServiceResult<IEnumerable<AdminDTO>>.Fail(ServiceErrorType.ServerError, "Server failed to get admins.");
+                return ServiceResult<IEnumerable<AdminDTO>>.Fail(ServiceErrorType.ServerError, $"Server failed to get admins. {ex.Message}");
             }
         }
 
@@ -172,6 +175,15 @@ namespace E_commerce_Endpoints.Services.Implementation
                     _logger.LogWarning($"Admin with ID {id} not found.");
                     return ServiceResult<bool>.Fail(ServiceErrorType.NotFound, $"Admin with ID {id} not found.");
                 }
+
+                var user = await _context.Users.FindAsync(admin.UserId);
+                if(user == null)
+                {
+                    _logger.LogWarning($"Admin with ID {id} is found, but no user conected with it, fails to find user with id : {admin.UserId}.");
+                    return ServiceResult<bool>.Fail(ServiceErrorType.NotFound, $"Admin with ID {id} is found, but no user conected with it, fails to find user with id : {admin.UserId}.");
+                }
+
+                user.Role = "Customer";
                 _context.Admins.Remove(admin);
                 await _context.SaveChangesAsync();
 
@@ -180,7 +192,7 @@ namespace E_commerce_Endpoints.Services.Implementation
             catch (Exception ex)
             {
                 _logger.LogError($"Server failed to delete admin: {ex.Message}, at {DateTime.UtcNow}");
-                return ServiceResult<bool>.Fail(ServiceErrorType.ServerError, "Server failed to delete admin.");
+                return ServiceResult<bool>.Fail(ServiceErrorType.ServerError, $"Server failed to delete admin. {ex.Message}");
             }
         }
     }

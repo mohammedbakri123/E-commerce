@@ -19,7 +19,7 @@ namespace E_commerce_Endpoints.Controllers
             _logger = logger;
         }
 
-        [Authorize(Roles = "Admin")]
+        //  [Authorize(Roles = "Admin")]
         [HttpPost("add")]
         public async Task<IActionResult> Add([FromBody] AddProductDTO dto)
         {
@@ -27,7 +27,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("update")]
         public async Task<IActionResult> Update([FromBody] UpdateProductDTO dto)
         {
@@ -35,7 +35,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("get/{id:int}")]
         public async Task<IActionResult> GetByID(int id)
         {
@@ -43,7 +43,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        //  [Authorize]
         [HttpGet("getByName")]
         public async Task<IActionResult> GetByName([FromQuery] string name)
         {
@@ -51,7 +51,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        // [Authorize]
         [HttpGet("getAll")]
         public async Task<IActionResult> GetAll(
             [FromQuery] int? brandId = null,
@@ -63,7 +63,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        [Authorize]
+        //  [Authorize]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> Delete(int id)
         {

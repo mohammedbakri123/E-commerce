@@ -2,8 +2,6 @@
 using E_commerce_Endpoints.Data.Entities;
 using E_commerce_Endpoints.DTO.Product.Request;
 using E_commerce_Endpoints.DTO.Product.Response;
-using E_commerce_Endpoints.DTO.User.Request;
-using E_commerce_Endpoints.DTO.User.Response;
 using E_commerce_Endpoints.Helper;
 using E_commerce_Endpoints.Services.Interfaces;
 using E_commerce_Endpoints.Shared;
