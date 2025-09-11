@@ -1,0 +1,52 @@
+.footer {
+  display: flex;
+  padding: 3.2rem 0;
+  justify-content: center;
+  align-items: center;
+  background-color: #319ed8;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+}
+
+.footer-logo {
+  width: 16rem;
+  margin-bottom: 1.6rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.links-footer {
+  margin-bottom: 1.6rem;
+}
+
+.links-footer a {
+  text-decoration: none;
+  color: white;
+  font-size: 2rem;
+}
+
+.footer-sub_header {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.follow-methods li a img {
+  width: 4.6rem;
+}
+
+.follow-methods {
+  margin-bottom: 1.6rem;
+}
+
+.copyright {
+  color: white;
+  font-size: 1.6rem;
+  font-weight: bold;
+}

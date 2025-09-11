@@ -1,0 +1,324 @@
+/* - Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
+
+/* - Line heights
+Default: 1
+Small: 1.05
+Medium: 1.2
+Paragraph default: 1.6
+
+- Letter spacing
+-0.5px
+0.75px */
+
+/* - Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+/* -----------------------------
+general
+----------------------------- */
+
+.gird--2--row {
+  grid-template-rows: 10fr 7fr;
+}
+
+main {
+  overflow: hidden;
+}
+/* -----------------------------
+hero section
+*/
+
+.hero-section {
+  margin: 0 auto;
+  /* background-color: #eee; */
+  gap: 3.2rem;
+  height: 100vh;
+}
+
+.left_side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 3.2rem;
+  gap: 3.2rem;
+}
+
+.hero-title {
+  color: #319ed8;
+  font-size: 8rem;
+  font-weight: normal;
+}
+
+.hero-title span {
+  font-weight: bold;
+  font-size: 8.5rem;
+}
+
+.hero-description {
+  font-size: 4rem;
+  line-height: 1.4;
+  margin-bottom: 3.2rem;
+}
+
+.buttons {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cta-button {
+  border: none;
+  font-size: 3rem;
+  padding: 1rem 2rem;
+  background-color: #319ed8;
+  border-radius: 8px;
+}
+
+.cta-button a:link,
+.cta-button a:visited {
+  text-decoration: none;
+  color: white;
+}
+
+.hero-img {
+  width: 100%;
+}
+
+/*----------------------------- */
+
+/* need-section 
+
+-------------------------------
+*/
+
+.need-section {
+  margin: 16.6rem auto;
+}
+
+.categories {
+  width: 100%;
+  gap: 12rem;
+  align-items: center;
+}
+
+.need-header {
+  text-align: center;
+  font-size: 4rem;
+  margin-bottom: 6.2rem;
+}
+
+.category {
+  padding: 3.2rem;
+  background-color: #ddecff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  gap: 3.2rem;
+}
+
+.lap-img img {
+  width: 20.4rem;
+}
+
+.cat_name {
+  font-size: 2rem;
+  text-align: center;
+}
+.cat_img {
+  width: 12rem;
+}
+
+/*----------------------------- */
+
+/* promo-section
+
+-------------------------------
+*/
+
+.promo-section {
+  background-image: linear-gradient(
+    to left,
+    rgba(154, 207, 236, 0),
+    rgb(153 207 235)
+  );
+
+  padding: 3.2rem 1.2rem;
+  border-radius: 20px;
+  margin: 16.6rem auto;
+  position: relative;
+}
+
+.promo-img {
+  width: 70%;
+  justify-self: center;
+}
+
+.right-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.promo-title {
+  text-align: center;
+  color: #222;
+  font-size: 6.7rem;
+  font-weight: normal;
+  margin-bottom: 3.2rem;
+}
+
+.promo-text {
+  font-size: 3.2rem;
+  line-height: 1.4;
+  text-align: center;
+  margin-bottom: 6.4rem;
+}
+
+.btn-discover {
+  color: white;
+  padding: 2.4rem 3rem;
+}
+
+.promo-discount {
+  color: white;
+  padding: 1rem 3rem;
+  background-color: #fb9701;
+  position: absolute;
+  font-size: 4rem;
+  left: 0;
+  top: 0;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+/*----------------------------- */
+
+/* promo-section
+    
+ -------------------------------
+*/
+
+.products-section {
+  margin: 16.6rem auto;
+}
+
+.top-side {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6.4rem;
+}
+
+.section-title {
+  font-size: 4rem;
+}
+
+.view-all-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.view_all .view-all-link:link,
+.view_all .view-all-link:visited {
+  text-decoration: none;
+  color: #222;
+  font-size: 2.4rem;
+}
+
+.view_all {
+  background-color: transparent;
+  border: none;
+}
+
+.view-icon {
+  width: 25px;
+}
+
+.products-cards {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13.8rem;
+  justify-content: start;
+  position: relative;
+}
+
+.product-card {
+}
+
+.product-img-container {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  padding: 6rem 12rem;
+  background-color: #dde9ef;
+}
+
+.product-img {
+  width: 8rem;
+}
+
+.description {
+  background-color: #f6f6fb;
+  padding: 2.4rem 1.2rem 1rem 1.2rem;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.product-rating {
+  margin-bottom: 4.4rem;
+}
+
+.product-rating,
+.product-name {
+  font-size: 2rem;
+}
+
+.product-name {
+  margin-bottom: 2.4rem;
+}
+
+.product-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buy-button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  background-color: #568ba6;
+  color: white;
+  border-radius: 10px;
+}
+
+.add-to-card-button img {
+  width: 4.9rem;
+}
+
+.add-to-card-button {
+  background-color: transparent;
+}
+
+.arrow-product {
+  position: absolute;
+  background-color: #319ed8;
+  width: 4rem;
+  border-radius: 100px;
+  scale: 1.1;
+}
+
+.right-arrow-product {
+  right: 0;
+  transform: translateX(50%);
+}
+
+.left-arrow-product {
+  left: 0;
+  transform: translateX(-50%);
+}

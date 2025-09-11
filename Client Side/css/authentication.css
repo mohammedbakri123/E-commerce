@@ -1,0 +1,185 @@
+/* - Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
+
+/* - Line heights
+Default: 1
+Small: 1.05
+Medium: 1.2
+Paragraph default: 1.6
+
+- Letter spacing
+-0.5px
+0.75px */
+
+/* - Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+/* -----------------------------
+general
+----------------------------- */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Glory", sans-serif;
+}
+
+html {
+  /* font-size: 10px; */
+  /* 10px / 16px = 0.625 = 62.5% */
+  /* Percentage of user's browser font-size setting */
+  font-size: 50.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  /* position: relative; */
+}
+
+.section-login {
+  position: absolute;
+  width: 70%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 8fr 10fr;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+}
+
+.login-left {
+  display: flex;
+  align-items: center;
+  background-color: #319ed8;
+  position: relative;
+}
+
+.left-img {
+  width: 100%;
+}
+
+.btn {
+  border: none;
+  color: #111;
+  cursor: pointer;
+}
+
+.btn-sign_up,
+.btn-sign_in {
+  font-size: 2.4rem;
+  padding: 1rem 2rem;
+  transition: all 0.6s ease;
+}
+
+.sign-btns {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: unset;
+  gap: 1.2rem;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.btn-sign_up {
+  background-color: transparent;
+  color: white;
+  /* background-image: url(img/btn\ background.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center; */
+}
+
+.btn-sign_in {
+  background-color: transparent;
+}
+
+.img-back {
+  position: absolute;
+  transform: rotate(180deg);
+  z-index: -999;
+  top: 42%;
+  right: -1%;
+  transition: all 0.6s ease;
+}
+
+.login-right {
+  display: grid;
+  grid-template-rows: 7fr 10fr;
+  align-items: center;
+  gap: 2.4rem;
+  background-color: white;
+  padding: 3.2rem 0;
+}
+
+.logo {
+  width: 50%;
+  justify-self: center;
+  align-self: self-end;
+  margin-top: 4.6rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.2rem;
+  align-self: self-start;
+}
+
+.icon {
+  width: 3.6rem;
+  margin-right: 1.2rem;
+}
+.field {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  border-bottom: 3px solid #329fd9;
+  padding: 1rem 2rem;
+  transition: all 0.4s ease;
+}
+
+.field:hover {
+  transform: scale(1.1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.field input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 2.4rem;
+}
+
+.btn-submit {
+  font-size: 3rem;
+  padding: 1rem 4.8rem;
+  background-color: #014b68;
+  color: white;
+  border-radius: 9px;
+  margin-top: 4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
+}
+
+.btn-submit:hover,
+.btn-submit:visited {
+  background-color: #329fd9;
+}
+
+.message {
+  position: absolute;
+  bottom: -60%;
+  left: 11.6%;
+  font-size: 1.8rem;
+  color: red;
+}

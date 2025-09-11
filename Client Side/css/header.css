@@ -1,0 +1,54 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Glory", sans-serif;
+}
+
+html {
+  /* font-size: 10px; */
+  /* 10px / 16px = 0.625 = 62.5% */
+  /* Percentage of user's browser font-size setting */
+  font-size: 50.5%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  color: #444;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 6.8rem;
+  background-color: #eee;
+}
+
+.logo-img {
+  width: 8.6rem;
+}
+
+.link-others {
+  display: flex;
+  gap: 6.4rem;
+  font-size: 2rem;
+}
+
+.link-others a {
+  text-decoration: none;
+  color: black;
+}
+
+.link-others p {
+  cursor: pointer;
+}
+
+.operations-list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+.operations-list li a img {
+  width: 2rem;
+}

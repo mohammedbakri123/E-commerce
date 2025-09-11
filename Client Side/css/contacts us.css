@@ -1,0 +1,156 @@
+/* - Font sizes (px)
+10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98 */
+
+/* - Line heights
+Default: 1
+Small: 1.05
+Medium: 1.2
+Paragraph default: 1.6
+
+- Letter spacing
+-0.5px
+0.75px */
+
+/* - Spacing system (px)
+2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+/* -----------------------------
+general
+----------------------------- */
+
+/* =============================================== */
+.section-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12rem;
+}
+
+.hero-img {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-img img {
+  width: 75%;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.hero-img .header-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12.6rem;
+  font-weight: bold;
+}
+
+.contact-methods {
+  background-color: #83c4e7;
+  padding: 2rem 4rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+  width: 65%;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.method {
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  align-items: center;
+}
+
+.method-img {
+  width: 6.2rem;
+}
+
+.contact {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* =============================================== */
+/* =============================================== */
+
+/* =============================================== */
+/* =============================================== */
+
+.section-fire {
+  background-color: rgb(221 236 255);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 65%;
+  margin: 0 auto;
+  border-radius: 25px;
+  padding: 6rem 3rem 12rem 3rem;
+  box-shadow: 0 10px 30px 0px rgba(0, 0, 0, 0.204);
+  margin-bottom: 12rem;
+}
+
+.form-fire {
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
+  align-items: center;
+  width: 100%;
+}
+
+.form-fire .field {
+  background-color: rgb(100 181 227);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.4rem;
+  width: 70%;
+  padding: 4rem;
+  width: 80%;
+  border-radius: 25px;
+  border-bottom: 15px solid white;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.036);
+
+  transition: all 0.4s ease;
+}
+
+.form-fire .field input,
+.form-fire .field textarea {
+  border: none;
+  outline: none;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  font-size: 2.4rem;
+}
+
+.form-fire .field input::placeholder,
+.form-fire .field textarea::placeholder {
+  color: white;
+}
+
+.form-fire .field .icon {
+  width: 4rem;
+}
+
+.btn-submit {
+  border: none;
+  width: 80%;
+  padding: 3.2rem;
+  color: white;
+  border-radius: 25px;
+  background-color: #4c556d;
+  font-size: 2.4rem;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.15);
+}
+/* ===================================== */

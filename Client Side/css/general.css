@@ -1,0 +1,21 @@
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+}
+
+.gird--2--col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.gird--4--col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.btn {
+  border: none;
+  cursor: pointer;
+}
