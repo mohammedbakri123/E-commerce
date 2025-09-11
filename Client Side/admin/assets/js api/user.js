@@ -1,110 +1,3 @@
-// const all_user_table = document.querySelector(".all-users");
-// const formUser = document.querySelector(".form-user");
-
-// function CreateRow(user) {
-//   return `
-//     <tr class="odd gradeX" data-id="${user.id}">
-//       <td>${user.id}</td>
-//       <td>${user.name}</td>
-//       <td>${user.email}</td>
-//       <td>${user.status}</td>
-//       <td>${user.role}</td>
-//       <td>
-//         <a href="#" class="btn btn-success edit-btn">Edit</a>
-//         <a href="#" class="btn btn-danger delete-btn">Delete</a>
-//       </td>
-//     </tr>`;
-// }
-
-// formUser.addEventListener("submit", async (e) => {
-//   e.preventDefault();
-
-//   // جمع البيانات من الفورم
-//   const formData = new FormData(formUser);
-//   const data = Object.fromEntries(formData.entries());
-
-//   // التأكد من تطابق كلمة المرور والتأكيد
-//   if (data.password !== data.comfirmPassword) {
-//     alert("Password and Confirm Password do not match!");
-//     return;
-//   }
-
-//   // إنشاء JSON body للإرسال
-//   const body = {
-//     firstName: data.firstName,
-//     email: data.email,
-//     password: data.password,
-//     confirmPassword: data.comfirmPassword,
-//   };
-
-//   try {
-//     const response = await fetch("http://localhost:5106/User/add", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(body),
-//     });
-
-//     if (response.ok) {
-//       const result = await response.json();
-//       console.log("User added:", result);
-//       alert("User added successfully!");
-//       formUser.reset(); // إعادة تعيين الفورم
-//     } else {
-//       const errorMessage = await response.text();
-//       console.error("Error adding user:", errorMessage);
-//       alert("Failed to add user: " + (errorMessage || response.statusText));
-//     }
-//   } catch (err) {
-//     console.error(err);
-//     alert("Error: " + err.message);
-//   }
-// });
-
-// async function getAllUser() {
-//   try {
-//     const response = await fetch("http://localhost:5106/User/all");
-//     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-//     const data = await response.json();
-//     all_user_table.innerHTML = "";
-
-//     data.forEach((user) => {
-//       all_user_table.insertAdjacentHTML("beforeend", CreateRow(user));
-//     });
-//   } catch (error) {
-//     console.error("Error fetching users:", error.message);
-//     all_user_table.innerHTML = `<tr><td colspan="6">Failed to load users</td></tr>`;
-//   }
-// }
-
-// getAllUser();
-
-// all_user_table.addEventListener("click", async (e) => {
-//   e.preventDefault();
-//   const row = e.target.closest("tr");
-//   const userId = row.dataset.id;
-//   console.log(userId);
-
-//   if (e.target.classList.contains("edit-btn")) {
-//     // Example: redirect to edit page
-//     // window.location.href = `/edit-user.html?id=${userId}`;
-//   } else if (e.target.classList.contains("delete-btn")) {
-//     if (confirm("Are you sure you want to delete this user?")) {
-//       try {
-//         const res = await fetch(`http://localhost:5106/User/${userId}`, {
-//           method: "DELETE",
-//         });
-//         if (res.ok) row.remove();
-//         else alert("Failed to delete user");
-//       } catch (err) {
-//         console.error(err);
-//       }
-//     }
-//   }
-// });
-
 const pageState = document.querySelector(".page-state");
 const formUser = document.querySelector("form");
 const addBtn = formUser.querySelector('button[type="submit"]');
@@ -128,7 +21,6 @@ function initEditButton() {
 
   editBtn.addEventListener("click", handleEditSubmit);
 }
-
 // Fetch all users and populate table
 async function getAllUser() {
   try {
@@ -141,7 +33,6 @@ async function getAllUser() {
     all_user_table.innerHTML = `<tr><td colspan="6">Failed to load users</td></tr>`;
   }
 }
-
 // Render table rows
 function renderUserTable(users) {
   all_user_table.innerHTML = "";
@@ -157,13 +48,11 @@ function renderUserTable(users) {
       <td>
         <a href="#" class="btn btn-success edit-btn">Edit</a>
         <a href="#" class="btn btn-danger delete-btn">Delete</a>
-        <a href="#" class="btn btn-warning active-btn">Active</a>
       </td>
     `;
     all_user_table.appendChild(row);
   });
 }
-
 // Handle Add User
 formUser.addEventListener("submit", handleAddSubmit);
 
@@ -196,10 +85,11 @@ all_user_table.addEventListener("click", async (e) => {
   if (e.target.classList.contains("edit-btn")) {
     await loadUserToForm(userId);
   } else if (e.target.classList.contains("delete-btn")) {
-    await deleteUser(userId, row);
-  } else if (e.target.classList.contains("active-btn")) {
-    await activateUser(userId, row);
+    await deleteAdmin(userId, row);
   }
+  // else if (e.target.classList.contains("active-btn")) {
+  //   await activateUser(userId, row);
+  // }
 });
 
 // Get form data as object
@@ -218,10 +108,10 @@ function validatePasswords(password, confirmPassword) {
 }
 
 // Send data to API
-async function sendUserData(url, body) {
+async function sendUserData(url, body, Method = "POST") {
   try {
     const res = await fetch(url, {
-      method: "POST",
+      method: "Method",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
     });
@@ -297,7 +187,7 @@ async function handleEditSubmit() {
 }
 
 // Delete user
-async function deleteUser(userId, row) {
+async function deleteAdmin(userId, row) {
   if (!confirm("Are you sure you want to delete this user?")) return;
 
   try {
@@ -314,19 +204,19 @@ async function deleteUser(userId, row) {
 }
 
 // Activate user
-async function activateUser(userId, row) {
-  try {
-    const res = await fetch(`http://localhost:5106/User/activate/${userId}`, {
-      method: "POST",
-    });
-    if (!res.ok) throw new Error("Failed to activate user");
-    row.querySelector("td:nth-child(4)").textContent = "Active";
-    alert("User activated!");
-  } catch (err) {
-    console.error(err);
-    alert("Error: " + err.message);
-  }
-}
+// async function activateUser(userId, row) {
+//   try {
+//     const res = await fetch(`http://localhost:5106/User/activate/${userId}`, {
+//       method: "POST",
+//     });
+//     if (!res.ok) throw new Error("Failed to activate user");
+//     row.querySelector("td:nth-child(4)").textContent = "Active";
+//     alert("User activated!");
+//   } catch (err) {
+//     console.error(err);
+//     alert("Error: " + err.message);
+//   }
+// }
 
 // Initialize
 initEditButton();

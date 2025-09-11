@@ -101,7 +101,9 @@ namespace E_commerce_Endpoints.Services.Implementation
         {
             try
             {
-                var subCategories = await _context.SubCategories.ToListAsync();
+                var subCategories = await _context.SubCategories
+    .Include(s => s.Category)
+    .ToListAsync();
                 var response = subCategories.Select(s => new SubCategoryDTO
                 {
                     Id = s.SubcategoryId,

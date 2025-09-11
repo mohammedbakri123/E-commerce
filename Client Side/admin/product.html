@@ -24,6 +24,7 @@
       sizes="16x16"
       type="image/jpg"
     />
+    <script defer src="assets/js api/Product.js"></script>
   </head>
 
   <body>
@@ -42,7 +43,7 @@
             <div class="col-md-8">
               <div class="panel panel-default">
                 <div class="panel-heading">
-                  <i class="fa fa-plus-circle"></i> Add New product
+                  <i class="fa fa-plus-circle"></i> <span class="page-state">Add New Product</span> 
                 </div>
                 <div class="panel-body">
                   <div class="row">
@@ -52,66 +53,27 @@
                         enctype="multipart/form-data"
                         method="POST"
                       >
-                        <div class="form-group">
-                          <input type="hidden" name="user_id" value="" />
-                          <label>Thai Name</label>
-                          <input
-                            type="text"
-                            placeholder="Please Enter your Name "
-                            class="form-control"
-                            name="tname"
-                            required
-                          />
                         </div>
                         <div class="form-group">
-                          <label>English Name</label>
+                          <label>Product Name</label>
                           <input
                             type="text"
-                            placeholder="Please Enter your Name "
+                            placeholder="Please Enter Product Name"
                             class="form-control"
-                            name="ename"
-                            required
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label>Product image 1</label><br />
-                          <input
-                            type="file"
-                            class="form-control"
-                            name="image1"
-                          />
-                          <label>Product image 2</label><br />
-                          <input
-                            type="file"
-                            class="form-control"
-                            name="image2"
-                          />
-                          <label>Product image 3</label><br />
-                          <input
-                            type="file"
-                            class="form-control"
-                            name="image3"
-                          />
-                          <label>Product image 4</label><br />
-                          <input
-                            type="file"
-                            class="form-control"
-                            name="image4"
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label>Cost</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            placeholder="Please Enter your Cost"
-                            name="cost"
+                            name="name"
                             required
                           />
                         </div>
                         <div class="form-group">
                           <label>Product Category</label>
-                          <select class="form-control" name="role_id">
+                          <select id="subCategorySelect" class="form-control" name="subCategoryId">
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label>Product Brand</label>
+                          <select id="BrandSelect" class="form-control" name="brandId">
                             <option value="1">Category 1</option>
                             <option value="2">Category 2</option>
                           </select>
@@ -141,43 +103,27 @@
                 <div class="panel-body">
                   <div class="table-responsive">
                     <table
-                      class="table table-striped table-bordered table-hover"
+                      class="table table-striped table-bordered table-hover "
                       id="dataTables-example"
                     >
                       <thead>
                         <tr>
-                          <th>Thai Name</th>
-                          <th>English Name</th>
-                          <th>Image</th>
-                          <th>Cost</th>
+                          <th>Product ID</th>
+                          <th>Product Name</th>
+                          <th>Brand Name</th>
                           <th>Category</th>
+                          <th>createdDate</th>
                           <th>Action</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="all-Products">
                         <tr class="odd gradeX">
                           <td>Product 1</td>
-                          <td>Product 1 EN</td>
-                          <td>
-                            <img
-                              src="../img/image1.jpg"
-                              alt="image1"
-                              style="
-                                border: none;
-                                width: 100px;
-                                border-radius: 50px;
-                                height: 100px;
-                                object-fit: fill;
-                                transition: none;
-                              "
-                            />
-                          </td>
                           <td>10$</td>
                           <td>Category 1</td>
                           <td>
                             <a href="#" class="btn btn-success">Edit</a>
                             <a href="#" class="btn btn-danger">Delete</a>
-                            <a href="#" class="btn btn-warning">Active</a>
                           </td>
                         </tr>
                         <!-- More rows can be added here -->
