@@ -1,82 +1,78 @@
+"use strict";
+
 const pageState = document.querySelector(".page-state");
 const formProduct = document.querySelector("form");
 const addBtn = formProduct.querySelector('button[type="submit"]');
-const CancelBtn = formProduct.querySelector('button[type="reset"]');
+const cancelBtn = formProduct.querySelector('button[type="reset"]');
 
 let editBtn;
 let currentEditProductId = null;
 const all_Products_table = document.querySelector(".all-Products");
 
-// --- Init Edit Button ---
-
+// --- Init ---
 document.addEventListener("DOMContentLoaded", () => {
   FetchAllCategories();
   FetchAllBrands();
+  getAllProducts();
+  initEditButton();
 });
 
+// --- Fetch Categories ---
 async function FetchAllCategories() {
   try {
     const response = await fetch("http://localhost:5106/SubCategory/all");
     if (!response.ok) throw new Error("Failed to fetch categories");
 
     const data = await response.json();
-
     const select = document.getElementById("subCategorySelect");
-    if (!select) {
-      console.error("Category Select element not found");
-      return;
-    }
-    // Clear old options (except the default one)
+    if (!select) return console.error("Category Select element not found");
+
     select.innerHTML = '<option value="">-- Select Category --</option>';
 
-    // Populate new options
     data.forEach((item) => {
       const option = document.createElement("option");
-      option.value = item.id; // adjust based on your DTO property (maybe SubCategoryId)
-      option.textContent = item.name; // adjust based on your DTO property (maybe SubCategoryName)
+      option.value = item.subCategoryId ?? item.id; // adjust to API
+      option.textContent = item.subCategoryName ?? item.name;
       select.appendChild(option);
     });
   } catch (error) {
     console.error("Error fetching categories:", error);
   }
 }
+
+// --- Fetch Brands ---
 async function FetchAllBrands() {
   try {
     const response = await fetch("http://localhost:5106/Brand/all");
     if (!response.ok) throw new Error("Failed to fetch Brands");
 
     const data = await response.json();
-
     const select = document.getElementById("BrandSelect");
-    if (!select) {
-      console.error("BrandSelect element not found");
-      return;
-    }
+    if (!select) return console.error("BrandSelect element not found");
 
-    // Clear old options (except the default one)
     select.innerHTML = '<option value="">-- Select Brand --</option>';
 
-    // Populate new options
     data.forEach((item) => {
       const option = document.createElement("option");
-      option.value = item.id; // adjust based on your DTO property (maybe SubCategoryId)
-      option.textContent = item.name; // adjust based on your DTO property (maybe SubCategoryName)
+      option.value = item.brandId ?? item.id;
+      option.textContent = item.brandName ?? item.name;
       select.appendChild(option);
     });
   } catch (error) {
-    console.error("Error fetching categories:", error);
+    console.error("Error fetching brands:", error);
   }
 }
-// Call function when page loads
+
+// --- Init Edit Button ---
 function initEditButton() {
   if (!document.querySelector("#edit-btn")) {
     editBtn = document.createElement("button");
     editBtn.type = "button";
     editBtn.id = "edit-btn";
-    editBtn.textContent = "Edit Admin";
+    editBtn.textContent = "Update Product";
     editBtn.classList.add("btn", "btn-warning");
     editBtn.style.float = "right";
-    editBtn.style.display = "none"; // hidden until edit
+    editBtn.style.display = "none";
     formProduct.appendChild(editBtn);
   } else {
     editBtn = document.querySelector("#edit-btn");
@@ -84,60 +80,58 @@ function initEditButton() {
 
   editBtn.addEventListener("click", handleEditSubmit);
 }
-initEditButton();
 
-// --- Fetch All Admins ---
+// --- Fetch All Products ---
 async function getAllProducts() {
   try {
     const response = await fetch("http://localhost:5106/Product/getAll");
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     const data = await response.json();
-    console.log(data);
     renderProductTable(data);
   } catch (err) {
     console.error(err);
     all_Products_table.innerHTML = `<tr><td colspan="7">Failed to load products</td></tr>`;
   }
 }
-getAllProducts();
 
 // --- Render Products ---
-function renderProductTable(Products) {
+function renderProductTable(products) {
   all_Products_table.innerHTML = "";
-  Products.forEach((product) => {
+  products.forEach((product) => {
     const row = document.createElement("tr");
-    row.dataset.id = product.id;
+    row.dataset.id = product.productId ?? product.id;
     row.innerHTML = `
-        <td>${product.id}</td>
+        <td>${product.productId ?? product.id}</td>
         <td>${product.name}</td>
         <td>${product.brandName}</td>
         <td>${product.subCategoryName}</td>
         <td>${product.createdDate}</td>
         <td>
-        <a href="#" class="btn btn-success edit-btn">Edit</a>
-        <a href="#" class="btn btn-danger delete-btn">Delete</a>
+          <a href="#" class="btn btn-success edit-btn">Edit</a>
+          <a href="#" class="btn btn-danger delete-btn">Delete</a>
         </td>
     `;
     all_Products_table.appendChild(row);
   });
 }
 
-// --- Handle Clicks (Edit/Delete) ---
+// --- Handle Edit/Delete Clicks ---
 all_Products_table.addEventListener("click", async (e) => {
   e.preventDefault();
   const row = e.target.closest("tr");
   if (!row) return;
 
-  const ProductID = row.dataset.id;
+  const productId = row.dataset.id;
+  console.log(productId);
 
   if (e.target.classList.contains("edit-btn")) {
-    await loadProductToForm(ProductID);
+    await loadProductToForm(productId);
   } else if (e.target.classList.contains("delete-btn")) {
-    await deleteAdmin(ProductID, row);
+    await deleteProduct(productId, row);
   }
 });
 
-// --- Load Admin Into Form for Editing ---
+// --- Load Product Into Form for Editing ---
 async function loadProductToForm(productId) {
   try {
     const res = await fetch(`http://localhost:5106/Product/get/${productId}`);
@@ -145,35 +139,36 @@ async function loadProductToForm(productId) {
 
     const product = await res.json();
 
-    // Populate form fields
-    formProduct.name.value = product.name; // maps to <input name="name">
-    formProduct.subCategoryId.value = product.subCategoryId; // maps to <select name="subCategoryId">
-    formProduct.brandId.value = product.brandId; // maps to <select name="brandId">
+    console.log(product);
+    formProduct.name.value = product.name;
+    formProduct.subCategoryId.value = product.subCategoryID;
+    formProduct.brandId.value = product.brandID;
 
-    // Save the id for editing later
-    currentEditProductId = product.productId;
+    currentEditProductId = product.productId ?? product.id;
 
-    // Switch UI state (assuming you have these elements defined)
     addBtn.style.display = "none";
     editBtn.style.display = "inline-block";
-    pageState.textContent = `Edit Product ${product.productId}`;
+    pageState.textContent = `Edit Product ${currentEditProductId}`;
   } catch (err) {
     console.error(err);
     alert("Error loading product: " + err.message);
   }
 }
 
-// --- Delete Admin ---
-async function deleteAdmin(adminId, row) {
-  if (!confirm("Are you sure you want to delete this Admin?")) return;
+// --- Delete Product ---
+async function deleteProduct(productId, row) {
+  if (!confirm("Are you sure you want to delete this Product?")) return;
 
   try {
-    const res = await fetch(`http://localhost:5106/Admin/delete/${adminId}`, {
-      method: "DELETE",
-    });
-    if (!res.ok) throw new Error("Failed to delete Admin");
+    const res = await fetch(
+      `http://localhost:5106/Product/delete/${productId}`,
+      {
+        method: "DELETE",
+      }
+    );
+    if (!res.ok) throw new Error("Failed to delete Product");
     row.remove();
-    alert("Admin deleted successfully!");
+    alert("Product deleted successfully!");
   } catch (err) {
     console.error(err);
     alert("Error: " + err.message);
@@ -198,16 +193,16 @@ async function handleAddSubmit(e) {
   getAllProducts();
 }
 
-// --- Edit Existing Admin ---
+// --- Edit Existing Product ---
 async function handleEditSubmit() {
-  if (!currentEditAdminId) return alert("No product selected for edit");
+  if (!currentEditProductId) return alert("No product selected for edit");
 
   const data = getFormData();
-  data.productId = currentEditProductId; // include id for update
+  data.id = currentEditProductId;
+  console.log(currentEditProductId);
   console.log(data);
-  await sendProductData("http://localhost:5106/Product/update", data);
+  await sendProductData("http://localhost:5106/Product/update", data, "PUT");
 
-  // reset state
   formProduct.reset();
   currentEditProductId = null;
   addBtn.style.display = "inline-block";
