@@ -121,7 +121,6 @@ public class CartService : ICartService
         }
     }
 
-
     public async Task<ServiceResult<CartDTO>> GetLastCart(int userId)
     {
         try

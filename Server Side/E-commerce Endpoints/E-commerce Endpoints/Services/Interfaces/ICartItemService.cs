@@ -12,5 +12,7 @@ namespace E_commerce_Endpoints.Services.Interfaces
         Task<ServiceResult<CartItemDTO>> AddItem(AddCartItemDTO dto);
         Task<ServiceResult<CartItemDTO>> UpdateItem(UpdateCartItemDTO dto);
         Task<ServiceResult<bool>> DeleteItem(int cartItemId);
+
+        Task<ServiceResult<IEnumerable<CartItemDTO>>> GetCartItems(int CartID);
     }
 }

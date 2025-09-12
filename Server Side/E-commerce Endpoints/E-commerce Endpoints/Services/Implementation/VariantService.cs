@@ -177,6 +177,18 @@ namespace E_commerce_Endpoints.Services.Implementation
                 if (variant == null)
                     return ServiceResult<VariantDTO>.Fail(ServiceErrorType.NotFound, $"Variant with ID {id} not found.");
 
+                var Quantity = await GetVariantQuantityAsync(variant.VariantId);
+                if(Quantity == 0)
+                {
+                    return ServiceResult<VariantDTO>.Fail(ServiceErrorType.NotFound, $"Variant with ID {id} has no quantity.");
+                }
+
+                var price = await GetVariantPriceAsync(variant.VariantId);
+                if (Quantity == 0)
+                {
+                    return ServiceResult<VariantDTO>.Fail(ServiceErrorType.ServerError, $"Variant with ID {id} has no price.");
+                }
+
                 var response = new VariantDTO
                 {
                     VariantId = variant.VariantId,
@@ -185,8 +197,8 @@ namespace E_commerce_Endpoints.Services.Implementation
                     Status = variant.Status,
                     ProductId = variant.ProductId,
                     ProductName = variant.Product?.ProductName,
-                    Price = await GetVariantPriceAsync(variant.VariantId),
-                    Quantity = await GetVariantQuantityAsync(variant.VariantId),
+                    Price = price,
+                    Quantity = Quantity,
       
                 };
 

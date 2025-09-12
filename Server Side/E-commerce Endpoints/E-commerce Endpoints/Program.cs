@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using E_commerce_Endpoints.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -76,6 +77,9 @@ builder.Services.AddScoped<IAdminService , AdminService>();
 builder.Services.AddScoped<ISupplierService , SupplierService>();
 builder.Services.AddScoped<IStockService , StockService>();
 builder.Services.AddScoped<IFavoriteService, FavoriteService>();
+builder.Services.AddScoped<IOrderService , OrderService>();
+builder.Services.AddScoped<ICartService , CartService>();
+builder.Services.AddScoped<ICartItemService , CartItemService>();
 
 
 
