@@ -52,5 +52,12 @@ namespace E_commerce_Endpoints.Controllers
             var result = await _orderService.Delete(id);
             return MapServiceResult(result);
         }
+
+        [HttpPut("ChangeOrderStatus")]
+        public async Task<IActionResult> ChangeOrderStatus(ChangeOrderStatusDTO dto)
+        {
+            var result = await _orderService.ChangeStatus(dto);
+            return MapServiceResult(result);
+        }
     }
 }

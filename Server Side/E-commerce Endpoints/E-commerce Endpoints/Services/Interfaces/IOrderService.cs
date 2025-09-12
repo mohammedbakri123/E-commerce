@@ -12,5 +12,6 @@ namespace E_commerce_Endpoints.Services.Interfaces
         Task<ServiceResult<OrderDTO>> GetById(int orderId);
         Task<ServiceResult<IEnumerable<OrderDTO>>> GetAll();
         Task<ServiceResult<bool>> Delete(int orderId);
+        Task<ServiceResult<OrderDTO>> ChangeStatus(ChangeOrderStatusDTO dto);
     }
 }

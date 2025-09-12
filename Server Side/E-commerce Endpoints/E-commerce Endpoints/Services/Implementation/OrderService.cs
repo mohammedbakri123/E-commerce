@@ -64,7 +64,6 @@ namespace E_commerce_Endpoints.Services.Implementations
 
                 foreach (var item in cartItems)
                 {
-                    // 📌 جيب آخر ستوك للـ Variant
                     var stock = await _context.Stocks
                         .Where(s => s.VariantId == item.VariantId && (s.IsDone == null || s.IsDone == false))
                         .OrderByDescending(s => s.EntranceDate)
@@ -82,11 +81,9 @@ namespace E_commerce_Endpoints.Services.Implementations
                             $"Not enough stock for Variant {item.VariantId}. Available: {stock.CurrentQuantity}, Requested: {item.Quantity}");
                     }
 
-                    // 📌 حساب السعر
                     decimal itemPrice = stock.SellPrice ?? 0;
                     totalAmount += item.Quantity * itemPrice;
 
-                    // 📌 خصم الكمية
                     stock.CurrentQuantity -= item.Quantity;
 
                     if (stock.CurrentQuantity == 0)
@@ -97,7 +94,7 @@ namespace E_commerce_Endpoints.Services.Implementations
                     _context.Stocks.Update(stock);
                 }
 
-                // 📌 إنشاء الطلب مع المجموع المحسوب
+                // 📌 إنشاء الطلب
                 var order = new Order
                 {
                     UserId = dto.UserId,
@@ -110,6 +107,20 @@ namespace E_commerce_Endpoints.Services.Implementations
                 };
 
                 await _context.Orders.AddAsync(order);
+
+                // 📌 إغلاق السلة بعد إنشاء الطلب
+                var cart = await _context.Carts.FirstOrDefaultAsync(c => c.CartId == dto.CartId);
+                if (cart == null)
+                {
+                    _logger.LogWarning($"Cart : {dto.CartId}, not found. Could not close the Cart");
+                    return ServiceResult<OrderDTO>.Fail(ServiceErrorType.NotFound, $"Cart : {dto.CartId}, not found. Could not close the Cart");
+
+                }
+                cart!.isClosed = true;
+                _context.Carts.Update(cart);
+
+
+
                 await _context.SaveChangesAsync();
 
                 return ServiceResult<OrderDTO>.Ok(MapToDTO(order));
@@ -120,6 +131,7 @@ namespace E_commerce_Endpoints.Services.Implementations
                 return ServiceResult<OrderDTO>.Fail(ServiceErrorType.ServerError, "Failed to add order");
             }
         }
+
 
 
 
@@ -180,6 +192,7 @@ namespace E_commerce_Endpoints.Services.Implementations
                 var orders = await _context.Orders
                     .Include(o => o.User)
                     .Include(o => o.DeliveryInfo)
+                    .OrderByDescending(o => o.OrderDate)
                     .ToListAsync();
 
                 if (orders == null || orders.Count == 0)
@@ -231,6 +244,32 @@ namespace E_commerce_Endpoints.Services.Implementations
                 return ServiceResult<bool>.Fail(ServiceErrorType.ServerError, "Failed to delete order");
             }
         }
+
+        public async Task<ServiceResult<OrderDTO>> ChangeStatus(ChangeOrderStatusDTO dto)
+        {
+            try
+            {
+                var order = await _context.Orders.FindAsync(dto.OrderId);
+                if (order == null)
+                {
+                    return ServiceResult<OrderDTO>.Fail(ServiceErrorType.NotFound, $"Order {dto.OrderId} not found");
+                }
+
+                // تحديث الحالة
+                order.Status = string.IsNullOrWhiteSpace(dto.status) ? order.Status : dto.status;
+
+                _context.Orders.Update(order);
+                await _context.SaveChangesAsync();
+
+                return ServiceResult<OrderDTO>.Ok(MapToDTO(order));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Failed to change order status {dto.OrderId}: {ex.Message}");
+                return ServiceResult<OrderDTO>.Fail(ServiceErrorType.ServerError, "Failed to change order status");
+            }
+        }
+
 
         private OrderDTO MapToDTO(Order order)
         {
