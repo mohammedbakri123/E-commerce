@@ -55,7 +55,7 @@ function sign_up() {
   imgBack.style.top = "-15%";
 }
 
-async function fetchLoginOrRegister(url, data) {
+async function fetchLoginOrRegister(url, data, type) {
   try {
     const res = await fetch(url, {
       method: "POST",
@@ -76,6 +76,10 @@ async function fetchLoginOrRegister(url, data) {
     if (dataRes.token) {
       localStorage.clear();
       localStorage.setItem("userData", JSON.stringify(dataRes));
+      if (type === 4) {
+        sign_in();
+        return;
+      }
       alert("Login successful!");
       window.location.href = "index.html";
     } else {
@@ -103,10 +107,18 @@ loginForm.addEventListener("submit", async function (e) {
   const data = Object.fromEntries(formData.entries());
 
   if (Object.keys(data).length === 2) {
-    await fetchLoginOrRegister("http://localhost:5106/Auth/login", data);
+    await fetchLoginOrRegister(
+      "http://localhost:5106/Auth/login",
+      data,
+      Object.keys(data).length
+    );
   }
 
   if (Object.keys(data).length === 4) {
-    await fetchLoginOrRegister("http://localhost:5106/Auth/register", data);
+    await fetchLoginOrRegister(
+      "http://localhost:5106/Auth/register",
+      data,
+      Object.keys(data).length
+    );
   }
 });

@@ -4,6 +4,7 @@ const product_describtions = document.querySelector(".product-describtions");
 const quantity = document.querySelector(".quantity");
 const favBtn = document.querySelector(".add-to-fav-btn");
 const favBtnImg = document.querySelector(".add-to-fav-btn img");
+const addToCardBtn = document.querySelector(".add-to-card-btn");
 
 const params = new URLSearchParams(window.location.search);
 const variantId = params.get("variantId");
@@ -23,7 +24,7 @@ window.addEventListener("DOMContentLoaded", async function () {
     console.log(data);
 
     product_name.innerHTML = data.productName;
-    product_price.innerHTML = data.price;
+    product_price.innerHTML = data.price + "$";
     product_describtions.innerHTML = data.variantProperties;
     quantity.innerHTML = `Quantity: ${data.quantity}`;
 
@@ -78,4 +79,41 @@ favBtn.addEventListener("click", async function () {
       console.log(dataRes);
     }
   } catch (error) {}
+});
+
+addToCardBtn.addEventListener("click", async function () {
+  try {
+    const res = await fetch(
+      `http://localhost:5106/Cart/getLast/${currentUser.userId}`
+    );
+
+    const data = await res.json();
+    console.log(data);
+
+    const dataBody = {
+      cartId: data.cartId,
+      variantId: variantId,
+      quantity: 1,
+    };
+
+    const res2 = await fetch(`http://localhost:5106/CartItem/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataBody),
+    });
+
+    const data2 = await res2.json();
+    console.log(data2);
+
+    if (!res2.ok) {
+      const error = await res2.text();
+      throw new Error(`Server error: ${error}`);
+    }
+
+    alert("add to cart successfully");
+  } catch (error) {
+    console.error(error.message);
+  }
 });

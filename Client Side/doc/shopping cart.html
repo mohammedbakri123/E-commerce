@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Management Table</title>
+    <link rel="stylesheet" href="../css/header.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        /* background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center; */
+        /* padding: 40px 20px; */
+        color: #333;
+      }
+
+      .containerr {
+        margin: 9.6rem auto;
+        font-size: 2rem;
+        width: 100%;
+        max-width: 900px;
+        background-color: white;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 25px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .cart-title {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .cart-icon {
+        font-size: 28px;
+        background: rgba(255, 255, 255, 0.2);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      h1 {
+        font-weight: 600;
+        font-size: 28px;
+      }
+
+      .subtitle {
+        opacity: 0.9;
+        font-size: 15px;
+      }
+
+      .cart-summary {
+        background: rgba(255, 255, 255, 0.15);
+        padding: 12px 20px;
+        border-radius: 8px;
+        text-align: right;
+      }
+
+      .summary-text {
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .summary-total {
+        font-size: 22px;
+        font-weight: 700;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background-color: #f8f9fa;
+      }
+
+      th {
+        text-align: left;
+        padding: 18px 20px;
+        font-weight: 600;
+        color: #495057;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      td {
+        padding: 16px 20px;
+        border-bottom: 1px solid #e9ecef;
+        color: #495057;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+
+      tr:hover {
+        background-color: #f1f3f5;
+        transition: background-color 0.2s;
+      }
+
+      .product-name {
+        font-weight: 500;
+      }
+
+      .price {
+        font-weight: 600;
+        color: #2c7be5;
+      }
+
+      .date {
+        color: #6c757d;
+        font-size: 14px;
+      }
+
+      .delete-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .delete-btn:hover {
+        background-color: #ff2e43;
+      }
+
+      .cart-footer {
+        padding: 25px 30px;
+        background: #f8f9fa;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .continue-shopping {
+        color: #6c757d;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        transition: color 0.2s;
+      }
+
+      .continue-shopping:hover {
+        color: #495057;
+      }
+
+      .order-btn {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        border: none;
+        padding: 15px 35px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 16px;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 4px 15px rgba(106, 17, 203, 0.3);
+      }
+
+      .order-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
+      }
+
+      .order-btn:active {
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        header {
+          flex-direction: column;
+          gap: 15px;
+          align-items: flex-start;
+        }
+
+        .cart-summary {
+          align-self: stretch;
+          text-align: left;
+        }
+
+        th,
+        td {
+          padding: 14px 15px;
+        }
+
+        .cart-footer {
+          flex-direction: column;
+          gap: 20px;
+          align-items: flex-start;
+        }
+
+        .order-btn {
+          align-self: stretch;
+          justify-content: center;
+        }
+      }
+
+      @media (max-width: 576px) {
+        th:nth-child(3),
+        td:nth-child(3) {
+          display: none;
+        }
+      }
+
+      .discount-badge {
+        background: #ff6b6b;
+        color: white;
+        font-size: 12px;
+        padding: 3px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+      }
+    </style>
+    <link rel="stylesheet" href="../css/footer.css" />
+    <script defer src="../js/shopping_cart.js"></script>
+  </head>
+  <body>
+    <div class="header"></div>
+    <div class="containerr">
+      <header>
+        <div class="cart-title">
+          <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+          </div>
+          <div>
+            <h1>Shopping Cart</h1>
+            <p class="subtitle">Review your items and proceed to checkout</p>
+          </div>
+        </div>
+        <div class="cart-summary">
+          <div class="summary-text">Total Amount</div>
+          <div class="summary-total">$427.93</div>
+        </div>
+      </header>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <!-- <th>Created At</th> -->
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="products">
+            <!-- <tr>
+              <td class="product-name">Wireless Headphones</td>
+              <td class="price">$129.99</td>
+              <td class="date">May 12, 2023</td>
+              <td>
+                <button class="delete-btn">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="product-name">Smart Watch Series 5</td>
+              <td class="price">
+                $249.99 <span class="discount-badge">10% OFF</span>
+              </td>
+              <td class="date">June 3, 2023</td>
+              <td>
+                <button class="delete-btn">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="product-name">Bluetooth Speaker</td>
+              <td class="price">$47.95</td>
+              <td class="date">April 28, 2023</td>
+              <td>
+                <button class="delete-btn">
+                  <i class="fas fa-trash"></i> Delete
+                </button>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cart-footer">
+        <a href="#" class="continue-shopping">
+          <i class="fas fa-arrow-left"></i> Continue Shopping
+        </a>
+        <button class="order-btn">
+          <i class="fas fa-shopping-bag"></i> Place Order
+        </button>
+      </div>
+    </div>
+
+    <!-- <script>
+      // Add functionality to the delete buttons
+      document.querySelectorAll(".delete-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const productName =
+            this.closest("tr").querySelector(".product-name").textContent;
+          if (confirm(`Are you sure you want to delete "${productName}"?`)) {
+            this.closest("tr").style.opacity = "0.3";
+            this.disabled = true;
+            this.textContent = "Deleted";
+            // In a real application, you would send a request to your server here
+          }
+        });
+      });
+    </script> -->
+    <div class="footer"></div>
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+  </body>
+</html>
