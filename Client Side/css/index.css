@@ -24,7 +24,7 @@ general
 }
 
 main {
-  overflow: hidden;
+  /* overflow: scroll; */
 }
 /* -----------------------------
 hero section
@@ -246,6 +246,7 @@ hero section
   gap: 13.8rem;
   justify-content: start;
   position: relative;
+  overflow: scroll;
 }
 
 .product-card {
@@ -281,6 +282,7 @@ hero section
 
 .product-name {
   margin-bottom: 2.4rem;
+  cursor: pointer;
 }
 
 .product-buttons {

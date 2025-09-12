@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Management Table</title>
+    <link rel="stylesheet" href="../css/header.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: #333;
+      }
+
+      .containerr {
+        font-size: 1.6rem;
+        max-width: 1000px;
+        margin: 9rem auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+      }
+
+      header {
+        background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+        color: white;
+        padding: 25px 30px;
+      }
+
+      h1 {
+        font-weight: 600;
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .subtitle {
+        opacity: 0.9;
+        font-size: 15px;
+      }
+
+      .table-container {
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead {
+        background-color: #f8f9fa;
+      }
+
+      th {
+        text-align: left;
+        padding: 18px 20px;
+        font-weight: 600;
+        color: #495057;
+        border-bottom: 2px solid #e9ecef;
+      }
+
+      td {
+        padding: 16px 20px;
+        border-bottom: 1px solid #e9ecef;
+        color: #495057;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f8f9fa;
+      }
+
+      tr:hover {
+        background-color: #e9ecef;
+        transition: background-color 0.2s;
+      }
+
+      .delete-btn {
+        background-color: #ff4757;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.2s, transform 0.1s;
+      }
+
+      .delete-btn:hover {
+        background-color: #ff2e43;
+      }
+
+      .delete-btn:active {
+        transform: scale(0.97);
+      }
+
+      .product-name {
+        font-weight: 500;
+      }
+
+      .date {
+        color: #6c757d;
+        font-size: 14px;
+      }
+
+      footer {
+        text-align: center;
+        padding: 20px;
+        color: #6c757d;
+        font-size: 14px;
+        border-top: 1px solid #e9ecef;
+      }
+
+      @media (max-width: 768px) {
+        th,
+        td {
+          padding: 14px 15px;
+        }
+
+        .delete-btn {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+
+        header {
+          padding: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        th:nth-child(2),
+        td:nth-child(2) {
+          display: none;
+        }
+
+        body {
+          padding: 20px 10px;
+        }
+      }
+    </style>
+    <link rel="stylesheet" href="../css/footer.css" />
+
+    <script defer src="../js/favorite.js"></script>
+  </head>
+  <body>
+    <div class="header"></div>
+    <div class="containerr">
+      <header>
+        <h1>Favorites</h1>
+        <p class="subtitle">Have a good day</p>
+      </header>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Created At</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="Favorites"></tbody>
+        </table>
+      </div>
+
+      <!-- <footer>
+        <p>© 2023 Product Management System | 5 products displayed</p>
+      </footer> -->
+    </div>
+
+    <!-- <script>
+      // Add functionality to the delete buttons
+      document.querySelectorAll(".delete-btn").forEach((button) => {
+        button.addEventListener("click", function () {
+          const productName =
+            this.closest("tr").querySelector(".product-name").textContent;
+          if (confirm(`Are you sure you want to delete "${productName}"?`)) {
+            this.closest("tr").style.opacity = "0.3";
+            this.disabled = true;
+            this.textContent = "Deleted";
+            // In a real application, you would send a request to your server here
+          }
+        });
+      });
+    </script> -->
+    <div class="footer"></div>
+
+    <script src="../js/header.js"></script>
+    <script src="../js/footer.js"></script>
+  </body>
+</html>
