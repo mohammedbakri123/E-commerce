@@ -37,7 +37,7 @@ namespace E_commerce_Endpoints.Controllers
             return MapServiceResult(result);
         }
 
-        // [Authorize]
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

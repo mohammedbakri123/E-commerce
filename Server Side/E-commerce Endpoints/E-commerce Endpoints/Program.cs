@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using E_commerce_Endpoints.Services.Implementations;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 //-------------------------------------------------cors
@@ -35,7 +36,7 @@ builder.Services.AddDbContext<appDbContext>(options =>
 builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
 
 // Extract strongly typed settings for configuring JWT
-var jwtOptions = builder.Configuration.GetSection("Jwt").Get<JwtOptions>();
+var jwtOptions = builder.Configuration.GetSection("JWT").Get<JwtOptions>();
 var key = Encoding.UTF8.GetBytes(jwtOptions.Secret);
 
 // Configure Authentication

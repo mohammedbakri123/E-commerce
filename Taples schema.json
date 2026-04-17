@@ -29,7 +29,6 @@
         "product_id",
         "product_name",
         "brand_id",
-        "category_id",
         "subcategory_id",
         "created_at",
         "updated_at"
@@ -41,15 +40,14 @@
         "imagePaths(JSON)",
         "Variant_properties(JSON)",
         "status",
-        "variant_desc"
+        "product_id"
       ]
     },
     "Offers": {
       "columns": [
         "offer_id",
         "variant_id",
-        "offer_price",
-        "quantity",
+        "offer_percentage",
         "start_date",
         "end_date"
       ]
@@ -64,7 +62,8 @@
         "expireDate",
         "CostPrice",
         "sellPrice",
-        "is_Done"
+        "is_Done",
+        "supplier_id"
       ]
     },
     "Categories": {
@@ -77,11 +76,12 @@
       "columns": ["Brand_id", "Brand_name"]
     },
     "Cart": {
-      "columns": ["cart_id", "User_id", "create_at", "updated_at"]
+      "columns": ["cart_id", "User_id", "create_at", "updated_at", "isClosed"]
     },
     "Cart_items": {
       "columns": [
         "cart_item_id",
+        "cart_id",
         "variant_id",
         "Quantity",
         "price_per_unit",
@@ -99,7 +99,8 @@
         "status",
         "TotalAmount",
         "payment_method",
-        "DeliveryInfo_id"
+        "DeliveryInfo_id",
+        "cart_id"
       ]
     },
     "DeliveryInfo": {
@@ -113,16 +114,7 @@
         "created_at"
       ]
     },
-    "orderItems": {
-      "columns": [
-        "orderItem_id",
-        "order_id",
-        "stock_id",
-        "Quantity",
-        "unitPrice",
-        "subTotal"
-      ]
-    },
+
     "Suppliers": {
       "columns": ["supplier_id", "PhoneNumber", "Address", "company_name"]
     }
